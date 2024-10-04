@@ -5,18 +5,26 @@ import { FaGithub } from "react-icons/fa";
 import { Button } from '@/components/ui/button';
 import { Provider } from '@supabase/supabase-js';
 import { supabaseBrowser } from '@/utils/supabase/client';
+import { useSearchParams } from 'next/navigation';
 
 export default function AuthPage(){
 
+  const param = useSearchParams();
+  const next = param.get('next') || '/';
+
+
   const handleLoginWithOAuth = async(provider:Provider)=>{
-    console.log('provider', provider)
     const supabase =  supabaseBrowser();
-    supabase.auth.signInWithOAuth({
-      provider,
-      options:{
-        redirectTo:location.origin+"/auth/callback"
-      }
-    })
+    try {
+      await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: `${location.origin}/auth/callback?next=${next}`,
+        },
+      });
+    } catch (error) {
+      console.error('OAuth login failed', error);
+    }
   } 
 
   return (
@@ -32,24 +40,27 @@ export default function AuthPage(){
         <p className='text-sm text-gray-300'>Register/SignIn Today 👇</p>
 
         <div className='flex flex-col gap-5'>
-          <Button 
-            className='w-full flex items-center gap-2' 
-            variant={'outline'}
-            onClick={()=>handleLoginWithOAuth('github')}
-          >
-            <FaGithub/>  GitHub
-          </Button>
-          <Button 
-            className='w-full flex items-center gap-2' 
-            variant={'outline'}
-            onClick={()=>handleLoginWithOAuth('google')}
-          >
-            <FcGoogle /> Google
-          </Button>
+          <OAuthButton provider="github" icon={<FaGithub />} label="GitHub" onClick={handleLoginWithOAuth} />
+          <OAuthButton provider="google" icon={<FcGoogle />} label="Google" onClick={handleLoginWithOAuth} />
         </div>
 
         <div className='glowbox -z-10'></div>
       </div>
     </div>
+  )
+}
+
+type OAuthButtonProps = {
+  provider: Provider;
+  icon: React.ReactNode;
+  label: string;
+  onClick: (provider: Provider) => void;
+};
+
+const OAuthButton = ({ provider, icon, label, onClick }:OAuthButtonProps) =>{
+  return (
+  <Button className="w-full flex items-center gap-2" variant="outline" onClick={() => onClick(provider)}>
+    {icon} {label}
+  </Button>
   )
 }
