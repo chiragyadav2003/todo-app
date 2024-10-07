@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { ReactQueryClientProvider } from '@/components/query-provider';
-import { Navbar } from '@/components/navbar';
+import { Header } from '@/components/header';
 
 
 const geistSans = localFont({
@@ -35,12 +35,12 @@ export default function RootLayout({
           <ReactQueryClientProvider>
             <ThemeProvider
               attribute="class"
-              defaultTheme="dark"
+              defaultTheme="white"
               enableSystem
               disableTransitionOnChange
               >
-              <main className='max-w-6xl min-h-screen mx-auto py-10 space-y-10'>
-                <Navbar/>
+              <main className='min-h-screen mx-auto max-w-6xl sticky top-0 bg-background text-foreground'>
+                <Header/>
                 {children}
               </main>
             </ThemeProvider>
