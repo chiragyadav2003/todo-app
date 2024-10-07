@@ -36,7 +36,7 @@ export async function updateSession(request: NextRequest) {
 
   if(user){
     if(authPaths.includes(pathname)){
-      return NextResponse.redirect('/dashboard')
+      return NextResponse.redirect(new URL('/dashboard', request.url));
     }
   }
   else{
