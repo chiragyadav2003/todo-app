@@ -1,11 +1,12 @@
 'use client';
-import { KeyRound } from 'lucide-react';
+
 import { FcGoogle } from "react-icons/fc";
 import { FaGithub } from "react-icons/fa";
 import { Button } from '@/components/ui/button';
 import { Provider } from '@supabase/supabase-js';
 import { supabaseBrowser } from '@/utils/supabase/client';
 import { useSearchParams } from 'next/navigation';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function AuthPage(){
 
@@ -28,25 +29,23 @@ export default function AuthPage(){
   } 
 
   return (
-    <div className='flex items-center justify-center w-full h-screen'
-    >
-      <div className="w-96  rounded-md border p-5 space-y-5 relative bg-slate-900">
-
-        <div className="flex items-center gap-2">
-          <KeyRound />
-          <h1 className='text-2xl font-bold'>Next.js + Supabase </h1>
-        </div>
-
-        <p className='text-sm text-gray-300'>Register/SignIn Today 👇</p>
-
+    <section className="h-[calc(100vh-57px)] flex flex-col justify-start w-full pt-36">
+      <Card className="mx-auto max-w-sm">
+        <CardHeader>
+          <CardTitle className="text-2xl mx-auto">Login</CardTitle>
+          <CardDescription>
+            Select a provider below to log in to your account.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-4">
         <div className='flex flex-col gap-5'>
           <OAuthButton provider="github" icon={<FaGithub />} label="GitHub" onClick={handleLoginWithOAuth} />
           <OAuthButton provider="google" icon={<FcGoogle />} label="Google" onClick={handleLoginWithOAuth} />
-        </div>
-
-        <div className='glowbox -z-10'></div>
-      </div>
-    </div>
+          
+          </div>
+        </CardContent>
+      </Card>
+    </section>
   )
 }
 

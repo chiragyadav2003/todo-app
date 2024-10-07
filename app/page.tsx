@@ -3,27 +3,21 @@ import Link from 'next/link';
 
 export default function Home() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-br from-slate-900 to-black mx-auto">
-      <h1 className="text-5xl font-extrabold text-white mb-8 shadow-md">
-        Welcome to Our App!
-      </h1>
-      
-      <div className="space-y-4 w-full mx-auto">
-        
-        <div className='flex flex-col items-center justify-center bg-gradient-to-r from-blue-500 to-teal-500 rounded-xl p-6 max-w-md mx-auto shadow-xl'>
-          <Link href={'/dashboard'}>
-            <Button className='text-lg font-semibold text-slate-900 bg-slate-200 hover:bg-slate-300 transition-colors duration-300 w-full mb-3'>
-              Dashboard
+    <div className="flex flex-col items-center justify-start pt-20 min-h-screen bg-gradient-to-br from-slate-50 to-white dark:from-slate-900 dark:to-black transition-colors duration-300 relative pt-36">
+    <div className="w-full max-w-md mx-auto px-4">
+        <div className='bg-white dark:bg-slate-800 rounded-2xl p-8 shadow-2xl dark:shadow-slate-700/30 transition-all duration-300'>
+          <Link href={'/dashboard'} className="block mb-4">
+            <Button className='text-lg font-medium text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors duration-300 w-full h-14 rounded-xl flex items-center justify-center space-x-3'>
+              <span>Dashboard</span>
             </Button>
           </Link>
-          
-          <Link href={'/profile'}>
-            <Button className='text-lg font-semibold text-slate-900 bg-slate-200 hover:bg-slate-300 transition-colors duration-300 w-full'>
-              Profile
+          <Link href={'/profile'} className="block">
+            <Button className='text-lg font-medium text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-700 hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors duration-300 w-full h-14 rounded-xl flex items-center justify-center space-x-3'>
+              <span>Profile</span>
             </Button>
           </Link>
         </div>
       </div>
-    </div>
+  </div>
   );
 }
