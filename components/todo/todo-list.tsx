@@ -32,10 +32,7 @@ export type TodoOptimisticUpdate = (action: {
 }) => void;
 
 export function TodoList({ todos }: { todos: Array<Todo> }) {
-  const [optimisticTodos, optimisticTodosUpdate] = useOptimistic(
-    todos,
-    todoReducer
-  );
+  const [optimisticTodos, optimisticTodosUpdate] = useOptimistic(todos, todoReducer); // Optimistic update hook
   return (
     <>
       <TodoForm optimisticUpdate={optimisticTodosUpdate} />
