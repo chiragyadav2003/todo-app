@@ -39,7 +39,7 @@ export default function RootLayout({
               enableSystem
               disableTransitionOnChange
               >
-              <main className='min-h-screen mx-auto max-w-6xl sticky top-0 bg-background text-foreground'>
+              <main className='min-h-screen mx-auto max-w-6xl sticky top-0 bg-background text-foreground px-2'>
                 <Header/>
                 {children}
               </main>
