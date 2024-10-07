@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { useUser } from '@/app/hooks/useUser';
 import { useSignOut } from '@/app/hooks/signOut';
 import { useRouter } from 'next/navigation';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 export  function Header(){
   const router = useRouter();
@@ -32,7 +33,12 @@ export  function Header(){
             data?.email ? 
             (
               <form onSubmit={handleSignOut}  className="flex items-center gap-2">
-                <p>{data?.email}</p>
+                <Avatar className="w-8 h-8">
+                  <AvatarImage src={data.image_url!} alt={data.display_name!} />
+                  <AvatarFallback>
+                    {data.display_name ? data.display_name.charAt(0) : "U"}
+                  </AvatarFallback>
+              </Avatar>
                 <Button>Sign Out</Button>
               </form>
             ) : (
