@@ -12,7 +12,7 @@ const initUser = {
 
 export const useUser = ()=>{
   
-  return useQuery({
+  const {data, refetch, ...rest }  = useQuery({
     queryKey:['user'],
 
     queryFn:async()=>{
@@ -34,4 +34,6 @@ export const useUser = ()=>{
       return initUser; //Return an empty object if there is no user.
     }
   })
+
+  return {data, refetch, ...rest};
 }
